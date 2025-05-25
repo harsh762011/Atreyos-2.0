@@ -18,7 +18,7 @@
         }
 
         /* Ad containers */
-        .ad-top, .ad-bottom, .ad-extra {
+        .ad-top, .ad-bottom {
             width: 100%;
             max-width: 728px; /* Standard ad width, adjust as needed */
             margin: 20px auto;
@@ -98,8 +98,13 @@
         Your browser does not support the audio element.
     </audio>
 
-    <!-- Top Ad Container -->
-    <div class="ad-top" id="ad-top"></div>
+    <!-- Top Ad -->
+    <div class="ad-top" id="ad-top">
+        <div id="ad-banner-9980362"></div>
+        <script type="text/javascript">
+            aclib.runBanner({ zoneId: '9980362' });
+        </script>
+    </div>
 
     <!-- Main Content -->
     <div class="container">
@@ -120,20 +125,19 @@
             <a href="code.html">Test Generator for NEET students</a>
         </div>
         <div class="navbar">
-            <a href="contactus.html">Contact Us</a>
-            <a href="Privacypolicy.txt">Privacy Policy</a>
-            <a href="aboutus.txt">About Us</a>
+            <a href="contact us.html">Contact Us</a>
+            <a href="Privacy policy.txt">Privacy Policy</a>
+            <a href="about us.txt">About Us</a>
         </div>
     </div>
 
-    <!-- Bottom Ad Container -->
-    <div class="ad-bottom" id="ad-bottom"></div>
-
-    <!-- Extra Ad Container (for testing) -->
-    <div class="ad-extra" id="ad-extra"></div>
-
-    <!-- Hidden Ad Containers -->
-    <div id="ad-hidden" style="display: none;"></div>
+    <!-- Bottom Ad -->
+    <div class="ad-bottom" id="ad-bottom">
+        <div id="ad-banner-9983010"></div>
+        <script type="text/javascript">
+            aclib.runBanner({ zoneId: '9983010' });
+        </script>
+    </div>
 
     <!-- Bot Trap Links -->
     <a href="https://discovernative.com/al/visit.php?al=1,7" class="bot-trap"></a>
@@ -141,57 +145,38 @@
         <a href="https://discovernative.com/al/visit.php?al=1,6" class="bot-trap"></a>
     </noscript>
 
-    <!-- Ad Management Script -->
+    <!-- Ad Refresh and Other Ad Scripts -->
     <script type="text/javascript">
         // List of ad zones to refresh (excluding autoTag and interstitial)
         const adZones = [
-            { type: 'banner', zoneId: '9980362', container: 'ad-top' },
-            { type: 'banner', zoneId: '9983010', container: 'ad-bottom' },
-            { type: 'banner', zoneId: '9982966', container: 'ad-extra' },
-            { type: 'banner', zoneId: '9983018', container: 'ad-hidden' },
-            { type: 'banner', zoneId: '9983026', container: 'ad-hidden' },
-            { type: 'banner', zoneId: '9983034', container: 'ad-hidden' },
-            { type: 'banner', zoneId: '9983050', container: 'ad-hidden' },
+            { type: 'banner', zoneId: '9980362', container: 'ad-banner-9980362' },
+            { type: 'banner', zoneId: '9983010', container: 'ad-banner-9983010' },
+            { type: 'banner', zoneId: '9982966', container: 'ad-banner-9982966' },
+            { type: 'banner', zoneId: '9983018', container: 'ad-banner-9983018' },
+            { type: 'banner', zoneId: '9983026', container: 'ad-banner-9983026' },
+            { type: 'banner', zoneId: '9983034', container: 'ad-banner-9983034' },
+            { type: 'banner', zoneId: '9983050', container: 'ad-banner-9983050' },
             { type: 'pop', zoneId: '9980314', container: null },
             { type: 'inPagePush', zoneId: '9980478', container: null, maxAds: 2 }
         ];
 
-        // Function to create ad slot
-        function createAdSlot(zone) {
-            if (!zone.container) return; // Skip ads without containers (e.g., pop, inPagePush)
-            const container = document.getElementById(zone.container);
-            if (!container) {
-                console.error(`Container ${zone.container} not found for zone ${zone.zoneId}`);
-                return;
-            }
-            // Clear existing content
-            container.innerHTML = '';
-            // Create new ad slot
-            const slot = document.createElement('div');
-            slot.id = `ad-slot-${zone.zoneId}`;
-            container.appendChild(slot);
-            console.log(`Created ad slot for ${zone.zoneId} in ${zone.container}`);
-        }
-
         // Function to refresh ads
         function refreshAds() {
-            console.log('Refreshing ads at:', new Date().toLocaleTimeString());
             adZones.forEach(ad => {
-                // Create new ad slot for banners
-                createAdSlot(ad);
+                // Clear container if applicable
+                if (ad.container) {
+                    const container = document.getElementById(ad.container);
+                    if (container) container.innerHTML = '';
+                }
 
-                // Reinitialize ad with cache-busting parameter
+                // Reinitialize ad based on type
                 try {
-                    const cacheBuster = `cb=${Date.now()}`;
                     if (ad.type === 'banner') {
-                        console.log(`Refreshing banner ${ad.zoneId}`);
-                        aclib.runBanner({ zoneId: ad.zoneId, cacheBuster });
+                        aclib.runBanner({ zoneId: ad.zoneId });
                     } else if (ad.type === 'pop') {
-                        console.log(`Refreshing pop ${ad.zoneId}`);
-                        aclib.runPop({ zoneId: ad.zoneId, cacheBuster });
+                        aclib.runPop({ zoneId: ad.zoneId });
                     } else if (ad.type === 'inPagePush') {
-                        console.log(`Refreshing inPagePush ${ad.zoneId}`);
-                        aclib.runInPagePush({ zoneId: ad.zoneId, maxAds: ad.maxAds, cacheBuster });
+                        aclib.runInPagePush({ zoneId: ad.zoneId, maxAds: ad.maxAds });
                     }
                 } catch (e) {
                     console.error(`Failed to refresh ad ${ad.zoneId}:`, e);
@@ -199,27 +184,30 @@
             });
         }
 
+        // Refresh ads every 5 seconds
+        setInterval(refreshAds, 5000);
+
         // Initial ad loads (including non-refreshed ads)
         aclib.runAutoTag({ zoneId: 'wpmzzcly5m' });
         aclib.runInterstitial({ zoneId: '9980342' });
-        adZones.forEach(ad => {
-            createAdSlot(ad); // Create initial slots for banners
-            try {
-                if (ad.type === 'banner') {
-                    aclib.runBanner({ zoneId: ad.zoneId });
-                } else if (ad.type === 'pop') {
-                    aclib.runPop({ zoneId: ad.zoneId });
-                } else if (ad.type === 'inPagePush') {
-                    aclib.runInPagePush({ zoneId: ad.zoneId, maxAds: ad.maxAds });
-                }
-            } catch (e) {
-                console.error(`Failed to initialize ad ${ad.zoneId}:`, e);
-            }
-        });
-
-        // Refresh ads every 5 seconds
-        setInterval(refreshAds, 5000);
+        aclib.runPop({ zoneId: '9980314' });
+        aclib.runInPagePush({ zoneId: '9980478', maxAds: 2 });
+        aclib.runBanner({ zoneId: '9982966' });
+        aclib.runBanner({ zoneId: '9983018' });
+        aclib.runBanner({ zoneId: '9983026' });
+        aclib.runBanner({ zoneId: '9983034' });
+        aclib.runBanner({ zoneId: '9983050' });
     </script>
+
+    <!-- Additional ad containers for remaining banners -->
+    <div style="display: none;">
+        <div id="ad-banner-9982966"></div>
+        <div id="ad-banner-9983018"></div>
+        <div id="ad-banner-9983026"></div>
+        <div id="ad-banner-9983034"></div>
+        <div id="ad-banner-9983050"></div>
+        <div id="awn-z9980282"></div>
+    </div>
 
     <!-- Native Ad Scripts -->
     <script data-cfasync="false" type="text/javascript">
