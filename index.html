@@ -18,7 +18,7 @@
         }
 
         /* Ad containers */
-        .ad-top, .ad-bottom {
+        .ad-top, .ad-bottom, .ad-extra {
             width: 100%;
             max-width: 728px; /* Standard ad width, adjust as needed */
             margin: 20px auto;
@@ -139,6 +139,14 @@
         </script>
     </div>
 
+    <!-- Extra Ad (for testing visibility) -->
+    <div class="ad-extra" id="ad-extra">
+        <div id="ad-banner-9982966"></div>
+        <script type="text/javascript">
+            aclib.runBanner({ zoneId: '9982966' });
+        </script>
+    </div>
+
     <!-- Bot Trap Links -->
     <a href="https://discovernative.com/al/visit.php?al=1,7" class="bot-trap"></a>
     <noscript>
@@ -162,21 +170,29 @@
 
         // Function to refresh ads
         function refreshAds() {
+            console.log('Refreshing ads at:', new Date().toLocaleTimeString());
             adZones.forEach(ad => {
                 // Clear container if applicable
                 if (ad.container) {
                     const container = document.getElementById(ad.container);
-                    if (container) container.innerHTML = '';
+                    if (container) {
+                        console.log(`Clearing container for ${ad.zoneId}`);
+                        container.innerHTML = '';
+                    }
                 }
 
-                // Reinitialize ad based on type
+                // Reinitialize ad with cache-busting parameter
                 try {
+                    const cacheBuster = `cb=${Date.now()}`;
                     if (ad.type === 'banner') {
-                        aclib.runBanner({ zoneId: ad.zoneId });
+                        console.log(`Refreshing banner ${ad.zoneId}`);
+                        aclib.runBanner({ zoneId: ad.zoneId, cacheBuster });
                     } else if (ad.type === 'pop') {
-                        aclib.runPop({ zoneId: ad.zoneId });
+                        console.log(`Refreshing pop ${ad.zoneId}`);
+                        aclib.runPop({ zoneId: ad.zoneId, cacheBuster });
                     } else if (ad.type === 'inPagePush') {
-                        aclib.runInPagePush({ zoneId: ad.zoneId, maxAds: ad.maxAds });
+                        console.log(`Refreshing inPagePush ${ad.zoneId}`);
+                        aclib.runInPagePush({ zoneId: ad.zoneId, maxAds: ad.maxAds, cacheBuster });
                     }
                 } catch (e) {
                     console.error(`Failed to refresh ad ${ad.zoneId}:`, e);
@@ -184,24 +200,22 @@
             });
         }
 
-        // Refresh ads every 5 seconds
-        setInterval(refreshAds, 5000);
+        // Refresh ads every 15 seconds (adjust to 5000 for 5 seconds if confirmed supported)
+        setInterval(refreshAds, 15000);
 
         // Initial ad loads (including non-refreshed ads)
         aclib.runAutoTag({ zoneId: 'wpmzzcly5m' });
         aclib.runInterstitial({ zoneId: '9980342' });
         aclib.runPop({ zoneId: '9980314' });
         aclib.runInPagePush({ zoneId: '9980478', maxAds: 2 });
-        aclib.runBanner({ zoneId: '9982966' });
         aclib.runBanner({ zoneId: '9983018' });
         aclib.runBanner({ zoneId: '9983026' });
         aclib.runBanner({ zoneId: '9983034' });
         aclib.runBanner({ zoneId: '9983050' });
     </script>
 
-    <!-- Additional ad containers for remaining banners -->
+    <!-- Hidden ad containers for remaining banners -->
     <div style="display: none;">
-        <div id="ad-banner-9982966"></div>
         <div id="ad-banner-9983018"></div>
         <div id="ad-banner-9983026"></div>
         <div id="ad-banner-9983034"></div>
