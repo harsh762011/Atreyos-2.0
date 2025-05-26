@@ -2675,7 +2675,7 @@ Chapter15: Inverse Trigonometric Functions*/
         text-align: center;
     }
 
-    .ad-sidebar {
+    .ad-sidebar-left {
         display: flex;
         flex-direction: column;
         align-items: flex-start;
@@ -2684,7 +2684,16 @@ Chapter15: Inverse Trigonometric Functions*/
         top: 130px;
     }
 
-    /* Ensure main content adjusts for sidebar */
+    .ad-sidebar-right {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        position: absolute;
+        right: 20px;
+        top: 130px;
+    }
+
+    /* Ensure main content adjusts for sidebars */
     .content-wrapper {
         display: flex;
         flex-direction: row;
@@ -2696,7 +2705,7 @@ Chapter15: Inverse Trigonometric Functions*/
     }
 
     .container {
-        margin: 20px 20px 20px 340px; /* Adjust margin to fit sidebar */
+        margin: 20px 340px; /* Adjust margin to fit both sidebars */
     }
 
     /* Ad slots */
@@ -2729,10 +2738,22 @@ Chapter15: Inverse Trigonometric Functions*/
         background: rgba(255, 0, 0, 0.2); /* Red */
     }
 
-    #ad-slot-9983018, #ad-slot-9983026, #ad-slot-9983034, #ad-slot-9983050 {
+    #ad-slot-9983018 {
+        width: 300px;
+        height: 250px;
+        background: rgba(0, 255, 0, 0.2); /* Green */
+    }
+
+    #ad-slot-9983026 {
         width: 300px;
         height: 250px;
         background: rgba(0, 0, 255, 0.2); /* Blue */
+    }
+
+    #ad-slot-9983034, #ad-slot-9983050 {
+        width: 300px;
+        height: 250px;
+        background: rgba(128, 0, 128, 0.2); /* Purple */
     }
 
     /* Hide bot trap links */
@@ -2740,7 +2761,7 @@ Chapter15: Inverse Trigonometric Functions*/
         display: none;
     }
 
-    @media (max-width: 1024px) {
+    @media (max-width: 1280px) {
         .content-wrapper {
             flex-direction: column;
             align-items: center;
@@ -2748,7 +2769,7 @@ Chapter15: Inverse Trigonometric Functions*/
         .container {
             margin: 20px;
         }
-        .ad-sidebar {
+        .ad-sidebar-left, .ad-sidebar-right {
             position: static;
             align-items: center;
         }
@@ -2773,9 +2794,16 @@ Chapter15: Inverse Trigonometric Functions*/
 <!-- Top Ad Container -->
 <div class="ad-top" id="ad-top"></div>
 
-<!-- Sidebar Ad Container -->
-<div class="ad-sidebar" id="ad-sidebar">
+<!-- Left Sidebar Ad Container -->
+<div class="ad-sidebar-left" id="ad-sidebar-left">
     <div id="ad-banner-9982966"></div>
+    <div id="ad-banner-9983018"></div>
+</div>
+
+<!-- Right Sidebar Ad Container -->
+<div class="ad-sidebar-right" id="ad-sidebar-right">
+    <div id="ad-banner-9983026"></div>
+    <div id="ad-banner-9983034"></div>
 </div>
 
 <!-- Bottom Ad Container -->
@@ -2783,9 +2811,6 @@ Chapter15: Inverse Trigonometric Functions*/
 
 <!-- Hidden Ad Container -->
 <div id="ad-hidden" style="display: none;">
-    <div id="ad-banner-9983018"></div>
-    <div id="ad-banner-9983026"></div>
-    <div id="ad-banner-9983034"></div>
     <div id="ad-banner-9983050"></div>
     <div id="awn-z9980282"></div>
 </div>
@@ -2891,16 +2916,15 @@ Chapter15: Inverse Trigonometric Functions*/
     // Load AdCash ad
     function loadAd(config) {
         try {
-            const cacheBuster = `cb=${Date.now()}`;
             if (config.type === 'banner') {
                 createAdSlot(config);
-                aclib.runBanner({ zoneId: config.zoneId, cacheBuster });
+                aclib.runBanner({ zoneId: config.zoneId });
                 console.log(`Loaded banner ${config.zoneId} in ${config.slotId} at ${new Date().toISOString()}`);
             } else if (config.type === 'pop') {
-                aclib.runPop({ zoneId: config.zoneId, cacheBuster });
+                aclib.runPop({ zoneId: config.zoneId });
                 console.log(`Loaded pop ${config.zoneId} at ${new Date().toISOString()}`);
             } else if (config.type === 'inPagePush') {
-                aclib.runInPagePush({ zoneId: config.zoneId, maxAds: config.maxAds, cacheBuster });
+                aclib.runInPagePush({ zoneId: config.zoneId, maxAds: config.maxAds });
                 console.log(`Loaded inPagePush ${config.zoneId} at ${new Date().toISOString()}`);
             }
         } catch (e) {
@@ -2912,20 +2936,11 @@ Chapter15: Inverse Trigonometric Functions*/
         }
     }
 
-    // Refresh ads
-    function refreshAds() {
-        console.log(`Refreshing ad set at ${new Date().toISOString()}`);
-        adConfigs.forEach(config => loadAd(config));
-    }
-
     // Initial ad loads
     aclib.runAutoTag({ zoneId: 'wpmzzcly5m' });
     aclib.runAutoTag({ zoneId: 'bpukebdycv' });
     aclib.runInterstitial({ zoneId: '9980342' });
     adConfigs.forEach(config => loadAd(config));
-
-    // Refresh ads every 5 seconds
-    setInterval(refreshAds, 5000);
 
     console.log(`Ad script loaded at ${new Date().toISOString()}`);
 
