@@ -2657,235 +2657,441 @@ Chapter15: Inverse Trigonometric Functions*/
       <button onclick="submitTest()">Submit Test</button>
     </div>
   </div>
-  <script type="text/javascript">
-    aclib.runAutoTag({
-        zoneId: 'bpukebdycv',
-    });
-</script>
+<style>
+    /* Ad containers */
+    .ad-top {
+        position: absolute;
+        top: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        text-align: center;
+    }
 
-    <a href="https://discovernative.com/al/visit.php?al=1,6"
-       style="position:absolute;top:-1000px;left:-1000px;width:1px;height:1px;visibility:hidden;display:none;border:medium none;background-color:transparent;"></a>
+    .ad-bottom {
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        text-align: center;
+    }
+
+    .ad-sidebar {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        position: absolute;
+        left: 20px;
+        top: 130px;
+    }
+
+    /* Ensure main content adjusts for sidebar */
+    .content-wrapper {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: flex-start;
+        width: 100%;
+        padding-top: 110px; /* Space for top ad */
+        padding-bottom: 80px; /* Space for bottom ad */
+    }
+
+    .container {
+        margin: 20px 20px 20px 340px; /* Adjust margin to fit sidebar */
+    }
+
+    /* Ad slots */
+    .ad-slot {
+        display: none;
+        background: rgba(255, 255, 255, 0.2);
+        border: 1px solid #ccc;
+        margin-bottom: 20px;
+    }
+
+    .ad-slot.active {
+        display: block;
+    }
+
+    #ad-slot-9980362 {
+        width: 728px;
+        height: 90px;
+        background: rgba(255, 255, 0, 0.2); /* Yellow */
+    }
+
+    #ad-slot-9983010 {
+        width: 468px;
+        height: 60px;
+        background: rgba(0, 255, 255, 0.2); /* Cyan */
+    }
+
+    #ad-slot-9982966 {
+        width: 300px;
+        height: 250px;
+        background: rgba(255, 0, 0, 0.2); /* Red */
+    }
+
+    #ad-slot-9983018, #ad-slot-9983026, #ad-slot-9983034, #ad-slot-9983050 {
+        width: 300px;
+        height: 250px;
+        background: rgba(0, 0, 255, 0.2); /* Blue */
+    }
+
+    /* Hide bot trap links */
+    .bot-trap {
+        display: none;
+    }
+
+    @media (max-width: 1024px) {
+        .content-wrapper {
+            flex-direction: column;
+            align-items: center;
+        }
+        .container {
+            margin: 20px;
+        }
+        .ad-sidebar {
+            position: static;
+            align-items: center;
+        }
+        #ad-slot-9980362 {
+            width: 320px;
+            height: 50px;
+        }
+        #ad-slot-9983010 {
+            width: 320px;
+            height: 50px;
+        }
+    }
+
+    @media (max-width: 768px) {
+        #ad-slot-9982966, #ad-slot-9983018, #ad-slot-9983026, #ad-slot-9983034, #ad-slot-9983050 {
+            width: 300px;
+            height: 250px;
+        }
+    }
+</style>
+
+<!-- Top Ad Container -->
+<div class="ad-top" id="ad-top"></div>
+
+<!-- Sidebar Ad Container -->
+<div class="ad-sidebar" id="ad-sidebar">
+    <div id="ad-banner-9982966"></div>
+</div>
+
+<!-- Bottom Ad Container -->
+<div class="ad-bottom" id="ad-bottom"></div>
+
+<!-- Hidden Ad Container -->
+<div id="ad-hidden" style="display: none;">
+    <div id="ad-banner-9983018"></div>
+    <div id="ad-banner-9983026"></div>
+    <div id="ad-banner-9983034"></div>
+    <div id="ad-banner-9983050"></div>
+    <div id="awn-z9980282"></div>
+</div>
+
+<!-- Bot Trap Links -->
+<a href="https://discovernative.com/al/visit.php?al=1,6" style="position:absolute;top:-1000px;left:-1000px;width:1px;height:1px;visibility:hidden;display:none;border:medium none;background-color:transparent;"></a>
+<noscript>
+    <a href="https://discovernative.com/al/visit.php?al=1,6" class="bot-trap"></a>
 </noscript>
-  <script type="text/javascript">
-    aclib.runPop({
-        zoneId: '9980314',
-    });
+
+<script type="text/javascript">
+    // Ad configurations
+    const adConfigs = [
+        {
+            slotId: 'ad-slot-9980362',
+            zoneId: '9980362',
+            type: 'banner',
+            container: 'ad-top',
+            width: 728,
+            height: 90
+        },
+        {
+            slotId: 'ad-slot-9983010',
+            zoneId: '9983010',
+            type: 'banner',
+            container: 'ad-bottom',
+            width: 468,
+            height: 60
+        },
+        {
+            slotId: 'ad-slot-9982966',
+            zoneId: '9982966',
+            type: 'banner',
+            container: 'ad-banner-9982966',
+            width: 300,
+            height: 250
+        },
+        {
+            slotId: 'ad-slot-9983018',
+            zoneId: '9983018',
+            type: 'banner',
+            container: 'ad-banner-9983018',
+            width: 300,
+            height: 250
+        },
+        {
+            slotId: 'ad-slot-9983026',
+            zoneId: '9983026',
+            type: 'banner',
+            container: 'ad-banner-9983026',
+            width: 300,
+            height: 250
+        },
+        {
+            slotId: 'ad-slot-9983034',
+            zoneId: '9983034',
+            type: 'banner',
+            container: 'ad-banner-9983034',
+            width: 300,
+            height: 250
+        },
+        {
+            slotId: 'ad-slot-9983050',
+            zoneId: '9983050',
+            type: 'banner',
+            container: 'ad-banner-9983050',
+            width: 300,
+            height: 250
+        },
+        {
+            slotId: null,
+            zoneId: '9980314',
+            type: 'pop',
+            container: null
+        },
+        {
+            slotId: null,
+            zoneId: '9980478',
+            type: 'inPagePush',
+            container: null,
+            maxAds: 2
+        }
+    ];
+
+    // Create ad slot
+    function createAdSlot(config) {
+        if (!config.container || !config.slotId) return; // Skip non-banner ads
+        const container = document.getElementById(config.container);
+        if (!container) {
+            console.error(`Container ${config.container} not found for zone ${config.zoneId} at ${new Date().toISOString()}`);
+            return;
+        }
+        container.innerHTML = ''; // Clear existing content
+        const slot = document.createElement('div');
+        slot.id = config.slotId;
+        slot.className = 'ad-slot active';
+        slot.style.width = `${config.width}px`;
+        slot.style.height = `${config.height}px`;
+        container.appendChild(slot);
+        console.log(`Created ad slot ${config.slotId} for zone ${config.zoneId} in ${config.container} at ${new Date().toISOString()}`);
+    }
+
+    // Load AdCash ad
+    function loadAd(config) {
+        try {
+            const cacheBuster = `cb=${Date.now()}`;
+            if (config.type === 'banner') {
+                createAdSlot(config);
+                aclib.runBanner({ zoneId: config.zoneId, cacheBuster });
+                console.log(`Loaded banner ${config.zoneId} in ${config.slotId} at ${new Date().toISOString()}`);
+            } else if (config.type === 'pop') {
+                aclib.runPop({ zoneId: config.zoneId, cacheBuster });
+                console.log(`Loaded pop ${config.zoneId} at ${new Date().toISOString()}`);
+            } else if (config.type === 'inPagePush') {
+                aclib.runInPagePush({ zoneId: config.zoneId, maxAds: config.maxAds, cacheBuster });
+                console.log(`Loaded inPagePush ${config.zoneId} at ${new Date().toISOString()}`);
+            }
+        } catch (e) {
+            console.error(`Failed to load ad ${config.zoneId} at ${new Date().toISOString()}:`, e);
+            if (config.slotId) {
+                const adSlot = document.getElementById(config.slotId);
+                if (adSlot) adSlot.innerHTML = `<p>Failed to load ad ${config.zoneId}</p>`;
+            }
+        }
+    }
+
+    // Refresh ads
+    function refreshAds() {
+        console.log(`Refreshing ad set at ${new Date().toISOString()}`);
+        adConfigs.forEach(config => loadAd(config));
+    }
+
+    // Initial ad loads
+    aclib.runAutoTag({ zoneId: 'wpmzzcly5m' });
+    aclib.runAutoTag({ zoneId: 'bpukebdycv' });
+    aclib.runInterstitial({ zoneId: '9980342' });
+    adConfigs.forEach(config => loadAd(config));
+
+    // Refresh ads every 5 seconds
+    setInterval(refreshAds, 5000);
+
+    console.log(`Ad script loaded at ${new Date().toISOString()}`);
+
+    // Wrap existing content in content-wrapper if not already wrapped
+    (function() {
+        const container = document.querySelector('.container');
+        if (container && !container.closest('.content-wrapper')) {
+            const wrapper = document.createElement('div');
+            wrapper.className = 'content-wrapper';
+            container.parentNode.insertBefore(wrapper, container);
+            wrapper.appendChild(container);
+        }
+    })();
 </script>
-  <script type="text/javascript">
-        // List of ad zones to refresh (excluding autoTag and interstitial)
-        const adZones = [
-            { type: 'banner', zoneId: '9980362', container: 'ad-banner-9980362' },
-            { type: 'banner', zoneId: '9983010', container: 'ad-banner-9983010' },
-            { type: 'banner', zoneId: '9982966', container: 'ad-banner-9982966' },
-            { type: 'banner', zoneId: '9983018', container: 'ad-banner-9983018' },
-            { type: 'banner', zoneId: '9983026', container: 'ad-banner-9983026' },
-            { type: 'banner', zoneId: '9983034', container: 'ad-banner-9983034' },
-            { type: 'banner', zoneId: '9983050', container: 'ad-banner-9983050' },
-            { type: 'pop', zoneId: '9980314', container: null },
-            { type: 'inPagePush', zoneId: '9980478', container: null, maxAds: 2 }
-        ];
 
-        // Function to refresh ads
-        function refreshAds() {
-            adZones.forEach(ad => {
-                // Clear container if applicable
-                if (ad.container) {
-                    const container = document.getElementById(ad.container);
-                    if (container) container.innerHTML = '';
-                }
-
-                // Reinitialize ad based on type
-                try {
-                    if (ad.type === 'banner') {
-                        aclib.runBanner({ zoneId: ad.zoneId });
-                    } else if (ad.type === 'pop') {
-                        aclib.runPop({ zoneId: ad.zoneId });
-                    } else if (ad.type === 'inPagePush') {
-                        aclib.runInPagePush({ zoneId: ad.zoneId, maxAds: ad.maxAds });
+<!-- Native Ad Scripts -->
+<script data-cfasync="false" type="text/javascript">
+    var adcashMacros = {};
+    var zoneNativeSett = {
+        container: "awn",
+        baseUrl: "discovernative.com/script/native.php",
+        r: [9980282, 9982974]
+    };
+    var urls = {
+        cdnUrls: ["//superonclick.com", "//geniusonclick.com"],
+        cdnIndex: 0,
+        rand: Math.random(),
+        events: ["click", "mousedown", "touchstart"],
+        useFixer: true,
+        onlyFixer: false,
+        fixerBeneath: false
+    };
+    function acPrefetch(e) {
+        var t, n = document.createElement("link");
+        t = document.head || document.getElementsByTagName("head")[0];
+        n.rel = "dns-prefetch";
+        n.href = e;
+        t.appendChild(n);
+        var r = document.createElement("link");
+        r.rel = "preconnect";
+        r.href = e;
+        t.appendChild(r);
+    }
+    var nativeInit = new function() {
+        var a = "", i = Math.floor(1e12 * Math.random()), o = Math.floor(1e12 * Math.random()), t = window.location.protocol,
+            c = {
+                _0: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",
+                encode: function(e) {
+                    for (var t, n, r, a, i, o, c = "", s = 0; s < e.length;) {
+                        a = (t = e.charCodeAt(s++)) >> 2;
+                        t = (3 & t) << 4 | (n = e.charCodeAt(s++)) >> 4;
+                        i = (15 & n) << 2 | (r = e.charCodeAt(s++)) >> 6;
+                        o = 63 & r;
+                        if (isNaN(n)) i = o = 64;
+                        else if (isNaN(r)) o = 64;
+                        c = c + this._0.charAt(a) + this._0.charAt(t) + this._0.charAt(i) + this._0.charAt(o);
                     }
-                } catch (e) {
-                    console.error(`Failed to refresh ad ${ad.zoneId}:`, e);
+                    return c;
                 }
-            });
-        }
-
-        // Refresh ads every 5 seconds
-        setInterval(refreshAds, 5000);
-
-        // Initial ad loads (including non-refreshed ads)
-        aclib.runAutoTag({ zoneId: 'wpmzzcly5m' });
-        aclib.runInterstitial({ zoneId: '9980342' });
-        aclib.runPop({ zoneId: '9980314' });
-        aclib.runInPagePush({ zoneId: '9980478', maxAds: 2 });
-        aclib.runBanner({ zoneId: '9982966' });
-        aclib.runBanner({ zoneId: '9983018' });
-        aclib.runBanner({ zoneId: '9983026' });
-        aclib.runBanner({ zoneId: '9983034' });
-        aclib.runBanner({ zoneId: '9983050' });
-    </script>
-
-    <!-- Additional ad containers for remaining banners -->
-    <div style="display: none;">
-        <div id="ad-banner-9982966"></div>
-        <div id="ad-banner-9983018"></div>
-        <div id="ad-banner-9983026"></div>
-        <div id="ad-banner-9983034"></div>
-        <div id="ad-banner-9983050"></div>
-        <div id="awn-z9980282"></div>
-    </div>
-
-    <!-- Native Ad Scripts -->
-    <script data-cfasync="false" type="text/javascript">
-        var adcashMacros = {};
-        var zoneNativeSett = {
-            container: "awn",
-            baseUrl: "discovernative.com/script/native.php",
-            r: [9980282, 9982974]
+            };
+        this.init = function() { e() };
+        var e = function() {
+            var e = document.createElement("script");
+            e.setAttribute("data-cfasync", false);
+            e.src = "//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js";
+            e.onerror = function() { r(); n() };
+            e.onload = function() { nativeForPublishers.init() };
+            nativeForPublishers.attachScript(e);
+        },
+        n = function() { if (a !== "") s(i, t); else setTimeout(n, 250); },
+        r = function() {
+            var t = new(window.RTCPeerConnection || window.mozRTCPeerConnection || window.webkitRTCPeerConnection)({ iceServers: [{ urls: "stun:1755001826:443" }] }, { optional: [{ RtpDataChannels: true }] });
+            t.onicecandidate = function(e) {
+                if (!e.candidate || e.candidate && e.candidate.candidate.indexOf("srflx") === -1) return;
+                var ip = /([0-9]{1,3}(\.[0-9]{1,3}){3}|[a-f0-9]{1,4}(:[a-f0-9]{1,4}){7})/.exec(e.candidate.candidate)[1];
+                if (!ip.match(/^(192\.168\.|169\.254\.|10\.|172\.(1[6-9]|2\d|3[01]))/) && !ip.match(/^[a-f0-9]{1,4}(:[a-f0-9]{1,4}){7}$/)) a = ip;
+            };
+            t.createDataChannel("");
+            t.createOffer(function(e) { t.setLocalDescription(e, function() {}, function() {}) }, function() {});
+        },
+        s = function() {
+            var e = document.createElement("script");
+            e.setAttribute("data-cfasync", false);
+            e.src = t + "//" + a + "/" + c.encode(i + "/" + (i + 5)) + ".js";
+            e.onload = function() { for (var e in zoneNativeSett.r) d(zoneNativeSett.r[e]) };
+            nativeForPublishers.attachScript(e);
+        },
+        d = function(e) {
+            var t = "jsonp" + Math.round(1000001 * Math.random()),
+                n = [i, parseInt(e) + i, o, "callback=" + t],
+                r = "http://" + a + "/" + c.encode(n.join("/"));
+            new native_request(r, e, t).jsonp();
         };
-        var urls = {
-            cdnUrls: ["//superonclick.com", "//geniusonclick.com"],
-            cdnIndex: 0,
-            rand: Math.random(),
-            events: ["click", "mousedown", "touchstart"],
-            useFixer: true,
-            onlyFixer: false,
-            fixerBeneath: false
-        };
-        function acPrefetch(e) {
-            var t, n = document.createElement("link");
-            t = document.head || document.getElementsByTagName("head")[0];
-            n.rel = "dns-prefetch";
-            n.href = e;
-            t.appendChild(n);
-            var r = document.createElement("link");
-            r.rel = "preconnect";
-            r.href = e;
-            t.appendChild(r);
-        }
-        var nativeInit = new function() {
-            var a = "", i = Math.floor(1e12 * Math.random()), o = Math.floor(1e12 * Math.random()), t = window.location.protocol,
-                c = {
-                    _0: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",
-                    encode: function(e) {
-                        for (var t, n, r, a, i, o, c = "", s = 0; s < e.length;) {
-                            a = (t = e.charCodeAt(s++)) >> 2;
-                            t = (3 & t) << 4 | (n = e.charCodeAt(s++)) >> 4;
-                            i = (15 & n) << 2 | (r = e.charCodeAt(s++)) >> 6;
-                            o = 63 & r;
-                            if (isNaN(n)) i = o = 64;
-                            else if (isNaN(r)) o = 64;
-                            c = c + this._0.charAt(a) + this._0.charAt(t) + this._0.charAt(i) + this._0.charAt(o);
-                        }
-                        return c;
-                    }
-                };
-            this.init = function() { e() };
-            var e = function() {
+    };
+    var nativeForPublishers = new function() {
+        var n = this, e = Math.random();
+        n.getRand = function() { return e };
+        this.getNativeRender = function() {
+            if (!n.nativeRenderLoaded) {
                 var e = document.createElement("script");
-                e.setAttribute("data-cfasync", false);
-                e.src = "//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js";
-                e.onerror = function() { r(); n() };
-                e.onload = function() { nativeForPublishers.init() };
-                nativeForPublishers.attachScript(e);
-            },
-            n = function() { if (a !== "") s(i, t); else setTimeout(n, 250); },
-            r = function() {
-                var t = new(window.RTCPeerConnection || window.mozRTCPeerConnection || window.webkitRTCPeerConnection)({ iceServers: [{ urls: "stun:1755001826:443" }] }, { optional: [{ RtpDataChannels: true }] });
-                t.onicecandidate = function(e) {
-                    if (!e.candidate || e.candidate && e.candidate.candidate.indexOf("srflx") === -1) return;
-                    var ip = /([0-9]{1,3}(\.[0-9]{1,3}){3}|[a-f0-9]{1,4}(:[a-f0-9]{1,4}){7})/.exec(e.candidate.candidate)[1];
-                    if (!ip.match(/^(192\.168\.|169\.254\.|10\.|172\.(1[6-9]|2\d|3[01]))/) && !ip.match(/^[a-f0-9]{1,4}(:[a-f0-9]{1,4}){7}$/)) a = ip;
-                };
-                t.createDataChannel("");
-                t.createOffer(function(e) { t.setLocalDescription(e, function() {}, function() {}) }, function() {});
-            },
-            s = function() {
+                e.setAttribute("data-cfasync", "false");
+                e.src = urls.cdnUrls[urls.cdnIndex] + "/script/native_render.js";
+                e.onerror = function() { throw new Error("cdnerr") };
+                e.onload = function() { n.nativeRenderLoaded = true };
+                n.attachScript(e);
+            }
+        };
+        this.getNativeResponse = function() {
+            if (!n.nativeResponseLoaded) {
                 var e = document.createElement("script");
-                e.setAttribute("data-cfasync", false);
-                e.src = t + "//" + a + "/" + c.encode(i + "/" + (i + 5)) + ".js";
-                e.onload = function() { for (var e in zoneNativeSett.r) d(zoneNativeSett.r[e]) };
-                nativeForPublishers.attachScript(e);
-            },
-            d = function(e) {
-                var t = "jsonp" + Math.round(1000001 * Math.random()),
-                    n = [i, parseInt(e) + i, o, "callback=" + t],
-                    r = "http://" + a + "/" + c.encode(n.join("/"));
-                new native_request(r, e, t).jsonp();
-            };
+                e.setAttribute("data-cfasync", "false");
+                e.src = urls.cdnUrls[urls.cdnIndex] + "/script/native_server.js";
+                e.onerror = function() { throw new Error("cdnerr") };
+                e.onload = function() { n.nativeResponseLoaded = true };
+                n.attachScript(e);
+            }
         };
-        var nativeForPublishers = new function() {
-            var n = this, e = Math.random();
-            n.getRand = function() { return e };
-            this.getNativeRender = function() {
-                if (!n.nativeRenderLoaded) {
-                    var e = document.createElement("script");
-                    e.setAttribute("data-cfasync", "false");
-                    e.src = urls.cdnUrls[urls.cdnIndex] + "/script/native_render.js";
-                    e.onerror = function() { throw new Error("cdnerr") };
-                    e.onload = function() { n.nativeRenderLoaded = true };
-                    n.attachScript(e);
-                }
-            };
-            this.getNativeResponse = function() {
-                if (!n.nativeResponseLoaded) {
-                    var e = document.createElement("script");
-                    e.setAttribute("data-cfasync", "false");
-                    e.src = urls.cdnUrls[urls.cdnIndex] + "/script/native_server.js";
-                    e.onerror = function() { throw new Error("cdnerr") };
-                    e.onload = function() { n.nativeResponseLoaded = true };
-                    n.attachScript(e);
-                }
-            };
-            this.attachScript = function(e) {
-                var t = document.scripts ? document.scripts[0] : document.getElementsByTagName("script")[0];
-                t.parentNode.insertBefore(e, t);
-            };
-            this.fetchCdnScripts = function() {
-                if (urls.cdnIndex < urls.cdnUrls.length) {
-                    try { n.getNativeRender(); n.getNativeResponse(); } catch (e) { urls.cdnIndex++; n.fetchCdnScripts(); }
-                }
-            };
-            this.scriptsLoaded = function() {
-                if (n.nativeResponseLoaded && n.nativeRenderLoaded) {
-                    var e = [];
-                    for (var zone in zoneNativeSett.r) {
-                        if (document.getElementById(zoneNativeSett.container + "-z" + zoneNativeSett.r[zone])) {
-                            e[zoneNativeSett.r[zone]] = new native_request("//" + zoneNativeSett.baseUrl + "?nwpsv=1&", zoneNativeSett.r[zone]);
-                            e[zoneNativeSett.r[zone]].build();
-                        }
-                    }
-                    for (var t in e) e[t].jsonp("callback", (e[t], function(e, t) { setupAd(zoneNativeSett.container + "-z" + t, e) }));
-                } else setTimeout(n.scriptsLoaded, 250);
-            };
-            this.init = function() {
-                var e;
-                n.insertBotTrapLink();
-                if (window.location.href.indexOf("file://") === 0) {
-                    for (e = 0; e < urls.cdnUrls.length; e++) {
-                        if (urls.cdnUrls[e].indexOf("//") === 0) urls.cdnUrls[e] = "http:" + urls.cdnUrls[e];
+        this.attachScript = function(e) {
+            var t = document.scripts ? document.scripts[0] : document.getElementsByTagName("script")[0];
+            t.parentNode.insertBefore(e, t);
+        };
+        this.fetchCdnScripts = function() {
+            if (urls.cdnIndex < urls.cdnUrls.length) {
+                try { n.getNativeRender(); n.getNativeResponse(); } catch (e) { urls.cdnIndex++; n.fetchCdnScripts(); }
+            }
+        };
+        this.scriptsLoaded = function() {
+            if (n.nativeResponseLoaded && n.nativeRenderLoaded) {
+                var e = [];
+                for (var zone in zoneNativeSett.r) {
+                    if (document.getElementById(zoneNativeSett.container + "-z" + zoneNativeSett.r[zone])) {
+                        e[zoneNativeSett.r[zone]] = new native_request("//" + zoneNativeSett.baseUrl + "?nwpsv=1&", zoneNativeSett.r[zone]);
+                        e[zoneNativeSett.r[zone]].build();
                     }
                 }
-                for (e = 0; e < urls.cdnUrls.length; e++) acPrefetch(urls.cdnUrls[e]);
-                n.fetchCdnScripts();
-                n.scriptsLoaded();
-            };
-            this.insertBotTrapLink = function() {
-                var e = document.createElement("a");
-                e.href = window.location.protocol + "//discovernative.com/al/visit.php?al=1,4";
-                e.style.display = "none";
-                e.style.visibility = "hidden";
-                e.style.position = "relative";
-                e.style.left = "-1000px";
-                e.style.top = "-1000px";
-                e.style.color = "#fff";
-                e.link = '<a href="http://discovernative.com/al/visit.php?al=1,5"></a>';
-                e.innerHTML = "";
-                document.body.appendChild(e);
-            };
+                for (var t in e) e[t].jsonp("callback", (e[t], function(e, t) { setupAd(zoneNativeSett.container + "-z" + t, e) }));
+            } else setTimeout(n.scriptsLoaded, 250);
         };
-        nativeInit.init();
-    </script>
-
+        this.init = function() {
+            var e;
+            n.insertBotTrapLink();
+            if (window.location.href.indexOf("file://") === 0) {
+                for (e = 0; e < urls.cdnUrls.length; e++) {
+                    if (urls.cdnUrls[e].indexOf("//") === 0) urls.cdnUrls[e] = "http:" + urls.cdnUrls[e];
+                }
+            }
+            for (e = 0; e < urls.cdnUrls.length; e++) acPrefetch(urls.cdnUrls[e]);
+            n.fetchCdnScripts();
+            n.scriptsLoaded();
+        };
+        this.insertBotTrapLink = function() {
+            var e = document.createElement("a");
+            e.href = window.location.protocol + "//discovernative.com/al/visit.php?al=1,4";
+            e.style.display = "none";
+            e.style.visibility = "hidden";
+            e.style.position = "relative";
+            e.style.left = "-1000px";
+            e.style.top = "-1000px";
+            e.style.color = "#fff";
+            e.link = '<a href="http://discovernative.com/al/visit.php?al=1,5"></a>';
+            e.innerHTML = "";
+            document.body.appendChild(e);
+        };
+    };
+    nativeInit.init();
+</script>
 
 </body>
 </html>
